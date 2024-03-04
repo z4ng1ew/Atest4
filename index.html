@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Форма ввода логина и пароля</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .error-message {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Форма ввода логина и пароля</h2>
+
+  <div class="form-group">
+    <label for="username">Логин:</label>
+    <input type="text" id="username" name="username">
+    <span class="error-message" id="username-error"></span>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password">
+    <span class="error-message" id="password-error"></span>
+  </div>
+
+  <button onclick="validateForm()">Войти</button>
+
+  <script>
+    function validateForm() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      if (username.trim() === '') {
+        document.getElementById('username-error').innerText = 'Пожалуйста, введите логин';
+      } else {
+        document.getElementById('username-error').innerText = '';
+      }
+
+      if (password.trim() === '') {
+        document.getElementById('password-error').innerText = 'Пожалуйста, введите пароль';
+      } else if (password.length < 6) {
+        document.getElementById('password-error').innerText = 'Пароль должен содержать не менее 6 символов';
+      } else if (!/\d/.test(password)) {
+        document.getElementById('password-error').innerText = 'Пароль должен содержать хотя бы одну цифру';
+      } else {
+        document.getElementById('password-error').innerText = '';
+      }
+
+      if (username.trim() !== '' && password.trim() !== '' && password.length >= 6 && /\d/.test(password)) {
+        alert('Форма успешно валидирована. Логин: ' + username + ', Пароль: ' + password);
+      }
+    }
+  </script>
+
+</body>
+
+</html>
